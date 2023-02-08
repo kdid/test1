@@ -16,7 +16,6 @@ components:
           format: date-time
         description:
           type: string
-          nullable: true
         featured:
           type: boolean
         finding_aid_url:
