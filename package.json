@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kdid/test1/issues"
   },
-  "homepage": "https://github.com/kdid/test1#readme"
+  "homepage": "https://github.com/kdid/test1#readme",
+  "devDependencies": {
+    "openapi-typescript": "^6.1.0"
+  }
 }
