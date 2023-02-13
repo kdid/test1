@@ -24,6 +24,8 @@ jobs:
           node-version: 16.x
           cache: "npm"
           path: "${{ env.TMP_SRCDIR }}"
+      - name: Generate Typescript
+        run: npx openapi-typescript data-types.yaml --output schema.ts
       - run: npm ci
       - uses: actions/checkout@v3
         with:
