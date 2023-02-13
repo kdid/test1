@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: 16.x
           cache: "npm"
-          path: "${{ env.TMP_SRCDIR }}"
       - run: npm ci
         working-directory: "${{ env.TMP_SRCDIR }}"
       - run: npx openapi-typescript data-types.yaml --output schema.ts
