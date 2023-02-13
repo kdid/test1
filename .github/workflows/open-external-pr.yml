@@ -18,15 +18,16 @@ jobs:
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
       - uses: actions/checkout@v3
+        with:
+          path: "${{ env.TMP_SRCDIR }}"
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "npm"
           path: "${{ env.TMP_SRCDIR }}"
-      - name: Generate Typescript
-        run: npx openapi-typescript data-types.yaml --output schema.ts
       - run: npm ci
+      - run: npx openapi-typescript data-types.yaml --output schema.ts
       - uses: actions/checkout@v3
         with:
           path: "${{ env.TMP_DSTDIR }}"
