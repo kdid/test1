@@ -343,7 +343,7 @@ components:
         - url
     Status:
       nullable: true
-      description: This is new.ss..Preservation status of the resource
+      description: This is new. FOO .Preservation status of the resource
       type: string
       enum:
         - Not Started
