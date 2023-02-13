@@ -24,12 +24,13 @@ jobs:
         with:
           path: "${{ env.TMP_DSTDIR }}"
           repository: "kdid/test2"
-      - run: cd "${{ env.TMP_DSTDIR }}"
-        shell: bash
-      - run: ls .
-        shell: bash
+      # - run: cd "${{ env.TMP_DSTDIR }}"
+      #   shell: bash
+      # - run: ls .
+      #   shell: bash
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "npm"
       - run: npm ci
+        working-directory: "${{ env.TMP_SRCDIR }}"
