@@ -1,14 +1,8 @@
-on:
-  pull_request_target:
-    types:
-      - closed
-    branches:
-      - "release"
-    paths:
-      - "data-types.yaml"
+name: Open PR in test2 on push
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - run: |
