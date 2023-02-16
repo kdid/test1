@@ -17,7 +17,6 @@ jobs:
           path: "./source"
       - uses: actions/setup-node@v3
         with:
-          path: "./source"
           node-version: 16.x
           cache: "npm"
       - name: Generate Typescript file
