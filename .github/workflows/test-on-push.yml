@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo PR with changes to datatypes.yml was merge into staging
+          echo PR with changes to datatypes.yml was merged into staging
       - run: echo "TMP_SRCDIR=./source" >> $GITHUB_ENV
         shell: bash
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
@@ -18,3 +18,8 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npx openapi-typescript data-types.yaml --output schema.ts
+      - name: Checkout dcapi/types
+        uses: actions/checkout@v3
+        with:
+          repository: kdid/test2
+          path: ${{ env.TMP_DSTDIR }}
