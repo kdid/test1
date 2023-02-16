@@ -14,7 +14,7 @@ jobs:
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
-          path: ${{ env.TMP_SCRDIR }}
+          path: "source"
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
