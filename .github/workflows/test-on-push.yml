@@ -12,6 +12,8 @@ jobs:
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
       - uses: actions/checkout@v3
+        with:
+          path: ${{ env.TMP_SCRDIR }}
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
