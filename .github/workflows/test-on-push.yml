@@ -33,8 +33,7 @@ jobs:
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: git checkout -b pr-from-api
         shell: bash
-      - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
+      - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
         name: List files in the destination repo
