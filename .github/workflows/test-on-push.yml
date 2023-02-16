@@ -14,13 +14,16 @@ jobs:
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
-          path: "source"
+          path: ${{ env.TMP_SRCDIR }}
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "npm"
-      - run: npm ci
-      - run: npx openapi-typescript data-types.yaml --output schema.ts
+      - name: Generate Typescript file
+        working-directory: ${{ env.TMP_SRCDIR }}
+        run: |
+          npm ci
+          npx openapi-typescript data-types.yaml --output schema.ts
       - name: Checkout dcapi-types
         uses: actions/checkout@v3
         with:
