@@ -11,7 +11,8 @@ jobs:
         shell: bash
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
-      - uses: actions/checkout@v3
+      - name: Checkout dc-api-v2
+        uses: actions/checkout@v3
         with:
           path: ${{ env.TMP_SCRDIR }}
       - uses: actions/setup-node@v3
@@ -20,7 +21,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npx openapi-typescript data-types.yaml --output schema.ts
-      - name: Checkout dcapi/types
+      - name: Checkout dcapi-types
         uses: actions/checkout@v3
         with:
           repository: kdid/test2
