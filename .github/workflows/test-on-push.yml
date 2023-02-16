@@ -24,7 +24,7 @@ jobs:
         working-directory: "./source"
         run: |
           npm ci
-          npx openapi-typescript data-types.yaml --output ${{ env.TMP_DSTDIR }}/schema.ts
+          npx openapi-typescript data-types.yaml --output schema.ts
       - name: Checkout dcapi-types
         uses: actions/checkout@v3
         with:
