@@ -31,11 +31,10 @@ jobs:
           repository: kdid/test2
           path: ${{ env.TMP_DSTDIR }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: git checkout -b pr-from-api
+        run: git checkout -b change-from-api
         shell: bash
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        name: List files in the destination repo
-        run: |
-          ls -al
+        run: git push origin HEAD
+        shell: bash
