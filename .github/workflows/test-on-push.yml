@@ -1,5 +1,5 @@
 name: Open PR in test2 on push
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} has started on push workflow 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -12,21 +12,12 @@ jobs:
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
+          node-version: 16.x
+          cache: "npm"
           path: "${{ env.TMP_SRCDIR }}"
-      - uses: asdf-vm/actions/setup@v1
-      - name: Install NodeJS
-        run: |
-          asdf plugin add nodejs
-          asdf install nodejs
-          for node_version in $(cat .tool-versions | grep nodejs | awk '{print $2}'); do
-            ASDF_NODEJS_VERSION=$node_version npm install -g npm@$(cat .tool-versions | grep npm | awk '{print $2}')
-          done
       - run: npm ci
-        # working-directory: "${{ env.TMP_SRCDIR }}"
+        working-directory: "${{ env.TMP_SRCDIR }}"
       - run: npx openapi-typescript data-types.yaml --output schema.ts
-        # working-directory: "${{ env.TMP_SRCDIR }}"
-      - uses: actions/checkout@v3
-        with:
-          path: "${{ env.TMP_DSTDIR }}"
-          repository: "kdid/test2"
+        working-directory: "${{ env.TMP_SRCDIR }}"
