@@ -40,9 +40,8 @@ jobs:
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          git push origin change-from-api
+          git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git config --global user.name "kdid"
           git config --global user.email "karendid@gmail.com"
-        shell: bash
-      - run: git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git push origin change-from-api
         shell: bash
