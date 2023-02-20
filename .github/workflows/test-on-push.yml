@@ -36,5 +36,8 @@ jobs:
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
+        run: ls -al
+        shell: bash
+      - working-directory: "${{ env.TMP_DSTDIR }}"
         run: git push origin HEAD
         shell: bash
