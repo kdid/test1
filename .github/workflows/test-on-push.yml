@@ -36,7 +36,7 @@ jobs:
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: ls -al
+        run: git config --unset-all http.https://github.com/.extraheader
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: git push origin HEAD
