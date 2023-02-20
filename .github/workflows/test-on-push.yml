@@ -49,6 +49,8 @@ jobs:
           ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
+          git config --global user.email "karendid@gmail.com"
+          git config --global user.name "kdid"
           git commit -am "testing"
           git push origin HEAD
         shell: bash
