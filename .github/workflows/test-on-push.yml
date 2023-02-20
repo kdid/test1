@@ -7,13 +7,11 @@ jobs:
     environment: testing
     env:
       TARGET_BRANCH: "change-from-api"
+      TMP_SRCDIR: "./source"
+      TMP_DESTDIR: "./dest"
     steps:
       - run: |
           echo PR with changes to datatypes.yml was merged into staging
-      - run: echo "TMP_SRCDIR=./source" >> $GITHUB_ENV
-        shell: bash
-      - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
-        shell: bash
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
@@ -27,7 +25,7 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
         with:
-          path: "."
+          path: "./source/package.json"
       - name: Generate Typescript file
         working-directory: "./source"
         run: |
