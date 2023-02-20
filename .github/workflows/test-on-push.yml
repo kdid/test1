@@ -27,7 +27,7 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
         with:
-          path: "./source/package.json"
+          path: "./source"
       - name: Generate Typescript file
         working-directory: "./source"
         run: |

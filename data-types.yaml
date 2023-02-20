@@ -621,7 +621,7 @@ components:
             - task_number
         provenance:
           type: array
-          description: Location ..ssof Physical Object // will also include messy dates. Information about the provenance, such as origin, ownership and custodial history (chain of custody), of a resource.
+          description: Location of Physical Object // will also include messy dates. Information about the provenance, such as origin, ownership and custodial history (chain of custody), of a resource.
           items:
             type: string
         published:
