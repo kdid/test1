@@ -38,9 +38,10 @@ jobs:
         shell: bash
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
+      - name: Set GitHub Deploy Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: |
-          git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git push origin change-from-api
+        run: git push origin HEAD
         shell: bash
