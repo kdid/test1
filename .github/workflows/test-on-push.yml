@@ -39,7 +39,7 @@ jobs:
           repository: kdid/test2
           path: ${{ env.TMP_DSTDIR }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: git checkout -b change-from-api
+        run: git checkout change-from-api
         shell: bash
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
