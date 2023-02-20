@@ -14,11 +14,6 @@ jobs:
         shell: bash
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
-      - run: git config --global user.name "${{ inputs.git-name }}"
-        shell: bash
-      - run: git config --global user.email "${{ inputs.git-email }}"
-        shell: bash
-      - run: git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
@@ -44,8 +39,7 @@ jobs:
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: echo "The secret is ${{secrets.FOO}}"
-        shell: bash
-      - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: git push origin HEAD
+        run: |
+          git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git push origin change-from-api
         shell: bash
