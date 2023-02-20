@@ -36,11 +36,9 @@ jobs:
       - name: Checkout dcapi-types
         uses: actions/checkout@v3
         with:
-          repository: kdid/test2
           path: ${{ env.TMP_DSTDIR }}
-      - working-directory: "${{ env.TMP_DSTDIR }}"
-        run: git checkout change-from-api
-        shell: bash
+          ref: change-from-api
+          repository: kdid/test2
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - name: Set GitHub Deploy Key
