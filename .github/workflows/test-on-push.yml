@@ -4,6 +4,8 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    env:
+      CONFIG_ENV: "testing"
     steps:
       - run: |
           echo PR with changes to datatypes.yml was merged into staging
@@ -15,6 +17,7 @@ jobs:
         shell: bash
       - run: git config --global user.email "${{ inputs.git-email }}"
         shell: bash
+      - run: git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
