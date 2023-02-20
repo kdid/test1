@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing
     env:
-      CONFIG_ENV: "testing"
+      GITHUB_SHORT_SHA: $(git rev-parse --short "$GITHUB_SHA")
     steps:
       - run: |
           echo PR with changes to datatypes.yml was merged into staging
@@ -52,6 +52,6 @@ jobs:
           git config --global user.email "karendid@gmail.com"
           git config --global user.name "kdid"
           git add .
-          git commit -m "testing"
+          git commit -m "${{ env.GITHUB_SHORT_SHAW }}"
           git push origin HEAD
         shell: bash
