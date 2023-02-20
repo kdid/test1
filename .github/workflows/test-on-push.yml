@@ -49,6 +49,6 @@ jobs:
           ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          git commit -am "DC API relase to staging. Commit $(git rev-parse --short "$GITHUB_SHA"). Version ${{ steps.package-version.outputs.current-version}}"
+          git commit -am "testing"
           git push origin HEAD
         shell: bash
