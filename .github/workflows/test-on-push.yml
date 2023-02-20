@@ -14,6 +14,10 @@ jobs:
         shell: bash
       - run: echo "TMP_DSTDIR=./dest" >> $GITHUB_ENV
         shell: bash
+      - run: git config --global user.name "kdid"
+        shell: bash
+      - run: git config --global user.email "karendid@gmail.com"
+        shell: bash
       - run: git config --global url."https://${{ secrets.SECRET_TOKEN }}@github.com/".insteadOf "https://github.com/"
         shell: bash
       - name: Checkout dc-api-v2
