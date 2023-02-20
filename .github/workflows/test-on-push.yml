@@ -50,6 +50,6 @@ jobs:
           git config --global user.email "karendid@gmail.com"
           git config --global user.name "kdid"
           git add .
-          git commit -m "nulib/dc-api-v2 commit: ${{GITHUB_SHA}}"
+          git commit -m "nulib/dc-api-v2 commit: $GITHUB_SHA"
           git push origin HEAD
         shell: bash
