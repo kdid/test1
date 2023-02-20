@@ -52,6 +52,6 @@ jobs:
           git config --global user.email "karendid@gmail.com"
           git config --global user.name "kdid"
           git add .
-          git commit -m "${{ env.GITHUB_SHORT_SHAW }}"
+          git commit -m "${{ env.GITHUB_SHORT_SHA }}"
           git push origin HEAD
         shell: bash
