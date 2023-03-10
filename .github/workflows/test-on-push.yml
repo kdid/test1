@@ -26,6 +26,7 @@ jobs:
           node-version: 16.x
           cache: "npm"
       - name: Set short git commit SHA
+        working-directory: "${{ env.TMP_SRCDIR }}"
         id: vars
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
