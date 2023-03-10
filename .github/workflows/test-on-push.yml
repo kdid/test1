@@ -14,11 +14,6 @@ jobs:
       TMP_DSTDIR: "./dest"
       TYPES_REPO: "kdid/test2"
     steps:
-      - name: Set short git commit SHA
-        id: vars
-        run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "::set-output name=short_sha::$calculatedSha"
       - run: |
           echo PR with changes to datatypes.yml was merged into main
       - name: Checkout dc-api-v2
@@ -30,6 +25,11 @@ jobs:
           cache-dependency-path: "${{ env.TMP_SRCDIR }}/package-lock.json"
           node-version: 16.x
           cache: "npm"
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "::set-output name=short_sha::$calculatedSha"
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
