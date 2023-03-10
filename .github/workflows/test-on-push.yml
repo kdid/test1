@@ -47,7 +47,7 @@ jobs:
           ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          git checkout -b release-xxx-branch
+          git checkout -b release-xyz-branch
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .
