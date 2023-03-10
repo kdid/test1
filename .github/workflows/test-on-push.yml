@@ -9,7 +9,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      TARGET_BRANCH: "release-xxx-branch"
+      TARGET_BRANCH: "release-xyz-branch"
       TMP_SRCDIR: "./source"
       TMP_DSTDIR: "./dest"
       TYPES_REPO: "kdid/test2"
@@ -28,8 +28,6 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
-        with:
-          path: "${{ env.TMP_SRCDIR }}/package.json"
       - name: Generate Typescript file
         working-directory: "${{ env.TMP_SRCDIR }}"
         run: |
