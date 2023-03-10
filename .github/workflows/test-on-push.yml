@@ -40,16 +40,14 @@ jobs:
         with:
           path: ${{ env.TMP_DSTDIR }}
           repository: ${{env.TYPES_REPO}}
-      - run: |
-          git checkout -b release-xxx-branch
-          mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
-        shell: bash
       - name: Set GitHub Deploy Key
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
+          git checkout -b release-xxx-branch
+          mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .
