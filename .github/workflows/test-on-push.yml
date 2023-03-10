@@ -9,11 +9,16 @@ jobs:
       id-token: write
       contents: read
     env:
-      TARGET_BRANCH: "release-xyz-branch"
+      TARGET_BRANCH: "release-xxx-branch"
       TMP_SRCDIR: "./source"
       TMP_DSTDIR: "./dest"
       TYPES_REPO: "kdid/test2"
     steps:
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "::set-output name=short_sha::$calculatedSha"
       - run: |
           echo PR with changes to datatypes.yml was merged into main
       - name: Checkout dc-api-v2
@@ -28,6 +33,9 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
+        with:
+          path: "${{ env.TMP_SRCDIR }}/package.json"
+      - run: ls -al
       - name: Generate Typescript file
         working-directory: "${{ env.TMP_SRCDIR }}"
         run: |
@@ -47,7 +55,7 @@ jobs:
           ssh-private-key: ${{ secrets.TEST2_DEPLOY_KEY }}
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          git checkout -b release-xyz-branch
+          git checkout -b types-release-${{ steps.vars.outputs.short_sha }}
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .
