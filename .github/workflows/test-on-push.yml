@@ -2,41 +2,45 @@ name: Open PR in test2 on push
 run-name: ${{ github.actor }} has started on push workflow 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Push-Types-To-Exteranl-Repo-Staging:
     runs-on: ubuntu-latest
     environment: testing
+    permissions:
+      id-token: write
+      contents: read
     env:
-      TARGET_BRANCH: "change-from-api"
+      TARGET_BRANCH: "release-xxx-branch"
       TMP_SRCDIR: "./source"
-      TMP_DESTDIR: "./dest"
+      TMP_DSTDIR: "./dest"
+      TYPES_REPO: "kdid/test2"
     steps:
       - run: |
-          echo PR with changes to datatypes.yml was merged into staging
+          echo PR with changes to datatypes.yml was merged into main
       - name: Checkout dc-api-v2
         uses: actions/checkout@v3
         with:
-          path: "./source"
+          path: "${{ env.TMP_SRCDIR }}"
       - uses: actions/setup-node@v3
         with:
-          cache-dependency-path: "./source/package-lock.json"
+          cache-dependency-path: "${{ env.TMP_SRCDIR }}/package-lock.json"
           node-version: 16.x
           cache: "npm"
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
         with:
-          path: "./source/package.json"
+          path: "${{ env.TMP_SRCDIR }}/package.json"
       - name: Generate Typescript file
-        working-directory: "./source"
+        working-directory: "${{ env.TMP_SRCDIR }}"
         run: |
           npm ci
-          npx openapi-typescript data-types.yaml --output schema.ts
+          npx openapi-typescript docs/docs/spec/data-types.yaml --output schema.ts
       - name: Checkout dcapi-types
         uses: actions/checkout@v3
         with:
           path: ${{ env.TMP_DSTDIR }}
           ref: ${{ env.TARGET_BRANCH }}
-          repository: kdid/test2
+          repository: ${{env.TYPES_REPO}}
       - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - name: Set GitHub Deploy Key
@@ -48,6 +52,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .
-          git commit -m "nulib/dc-api-v2 commit: $GITHUB_SHA, package.json version: ${{ steps.package-version.outputs.current-version}}"
+          git commit -m "v${{ steps.package-version.outputs.current-version}}"
           git push origin HEAD
         shell: bash

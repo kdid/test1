@@ -626,7 +626,7 @@ components:
             type: string
         published:
           type: boolean
-          description: Resource is available on Digital Collections.
+          description: Resource is available on Digital Collections...
         publisher:
           type: array
           description: An entity responsible for making the resource available.
