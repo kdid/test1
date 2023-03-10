@@ -39,9 +39,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: ${{ env.TMP_DSTDIR }}
-          ref: ${{ env.TARGET_BRANCH }}
           repository: ${{env.TYPES_REPO}}
-      - run: mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
+      - run: |
+          git checkout -b release-xxx-branch
+          mv -f "${{ env.TMP_SRCDIR }}/schema.ts" "${{ env.TMP_DSTDIR }}/schema.ts"
         shell: bash
       - name: Set GitHub Deploy Key
         uses: webfactory/ssh-agent@v0.5.3
