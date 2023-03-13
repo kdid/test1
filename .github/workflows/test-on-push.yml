@@ -72,5 +72,5 @@ jobs:
       - name: Create issue
         working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          gh issue create -t "Update nulib/dcapi-types for API release v${{ steps.package-version.outputs.current-version}} -b "### Description\n\nReview PR: ${{ steps.open-types-pr.outputs.}}" -a @me -l "digital collections", "front end"
+          gh issue create -t "Update nulib/dcapi-types for API release v${{ steps.package-version.outputs.current-version}}" -b "### Description\n\nReview PR: ${{ steps.open-types-pr.outputs.}}" -a @me -l "digital collections", "front end"
         shell: bash
