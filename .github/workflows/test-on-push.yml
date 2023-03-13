@@ -13,6 +13,7 @@ jobs:
       TMP_SRCDIR: "./source"
       TMP_DSTDIR: "./dest"
       TYPES_REPO: "kdid/test2"
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - run: |
           echo PR with changes to datatypes.yml was merged into main
