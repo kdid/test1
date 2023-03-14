@@ -28,10 +28,9 @@ jobs:
           cache: "npm"
       - name: Set short git commit SHA
         working-directory: "${{ env.TMP_SRCDIR }}"
-        id: vars
+        id: short-sha
         run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "short_sha=$calculatedSha"
+          echo "short-sha=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: get-api-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
@@ -53,7 +52,7 @@ jobs:
         shell: bash
       - working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          git checkout -b dcapi-${{ steps.vars.outputs.short_sha }}
+          git checkout -b dcapi-${{ steps.short-sha.outputs.short-sha }}
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .
