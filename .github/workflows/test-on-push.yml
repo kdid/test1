@@ -67,10 +67,10 @@ jobs:
         id: open-types-pr
         working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          echo 'pr="$(gh pr create --base main --title "DC API release v${{ steps.package-version.outputs.current-version}}" --body "A new version of `nulib/dc-api-v2` has been released. Please review changes and release a new version of the types package if needed." --reviewer kdid)"' >> $GITHUB_OUTPUT
+          echo 'pr=$(gh pr create --base main --title "DC API release v${{ steps.package-version.outputs.current-version}}" --body "A new version of `nulib/dc-api-v2` has been released. Please review changes and release a new version of the types package if needed." --reviewer kdid)' >> $GITHUB_OUTPUT
         shell: bash
       - name: Create issue
         working-directory: "${{ env.TMP_DSTDIR }}"
         run: |
-          gh issue create -t "Update nulib/dcapi-types for API release v${{ steps.package-version.outputs.current-version}}" -b "Review PR: ${{ steps.open-types-pr.outputs.pr}}" -a @me -l "digital collections", "front end"
+          gh issue create -t "Update nulib/dcapi-types for API release v${{ steps.package-version.outputs.current-version}}" -b "Review PR: ${{ steps.open-types-pr.outputs.pr}}" -a @me -l "digital collections" -l "front end"
         shell: bash
