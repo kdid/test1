@@ -31,8 +31,8 @@ jobs:
         id: vars
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "::set-output name=short_sha::$calculatedSha"
-      - name: get-npm-version
+          echo "short_sha=$calculatedSha"
+      - name: get-api-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
         with:
